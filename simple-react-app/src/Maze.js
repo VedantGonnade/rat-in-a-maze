@@ -1,55 +1,37 @@
 import React from "react";
-import { Container, Box, Grid } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
+
 
 
 export default function Maze() {
 
-  const n = 8; // Change this value to adjust the grid size
+  const gridValue = 4; // Change this value to adjust the grid size
+  const grids = [];
 
-  const renderGridItems = () => {
-    const gridItems = [];
-
-    for (let i = 0; i < n; i++) {
-      for (let j = 0; j < n; j++) {
-        gridItems.push(
-          <Grid key={`${i}-${j}`} item xs={12 / n}>
-            <Box
-              sx={{
-                backgroundColor: 'green',
-                color: 'black',
-                height: 40,
-                
-              }}
-            />
-          </Grid>
-        );
+    function createGrid(n) {
+      const totalGrids = n*n
+      
+      for (let i = 0; i < totalGrids; i++) {
+        grids.push(
+          <Grid item xs={3} key={i}>
+              <Paper sx={{ height: '100%', border: 1, gap: 0, borderRadius: 0 }}></Paper>
+            </Grid>
+        )
       }
+      return grids
     }
+  
+    return (
+      <div style={{ backgroundColor: 'orange', height: '100vh', width: '100vw', display: 'flex', justifyContent: 'space-evenly', alignItems: 'start' }}>
+        <div style={{position: 'relative', top: '20%'}}>
+          <Grid container spacing={0} style={{ width: '200px', height: '200px' }}>
+            {createGrid(gridValue)}
+          </Grid>
+        </div>
+      </div>
+    );
+  
+  
 
-    return gridItems;
-  };
-
-
-  return (
-    <Container maxWidth="sm">
-      <Box
-        sx={{
-            backgroundColor: 'primary.dark',
-            height: 1000,
-            width: '100%',
-            '&:hover': {
-            backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
-            }
-        }}
-      >
-        <Grid container spacing={0}>
-          {renderGridItems()}
-        </Grid>
-      </Box>
-    </Container>
-      
-
-      
-  );
+  
 }
